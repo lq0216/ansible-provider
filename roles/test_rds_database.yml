@@ -1,0 +1,28 @@
+# This Playbook contains test scenario for  Create, modify, restart, release RDS instance and change rds instance type, create and delete database , grant account permission and revoke acccount permission
+# Playbook created by : 
+
+- name: Testing
+  hosts: localhost
+  connection: local
+  vars:
+#create rds instance     
+    alicloud_region: cn-beijing
+    alicloud_zone: cn-beijing-a 
+#create database
+    db_name: testtest
+#create account
+    account_name: testdemoaccount
+    account_password: test@123
+    description: test
+    name: testasda
+    instance_id: rm-2ze190c75a8543nie 
+  tasks:
+    - name: create database
+      alicloud_rds_database:
+        alicloud_region: '{{ alicloud_region }}'
+        state: present
+        instance_id: '{{ instance_id }}'
+        name: '{{ name }}' 
+        description: '{{ description }}'
+        character_set_name: utf8
+      register: result_create_account
